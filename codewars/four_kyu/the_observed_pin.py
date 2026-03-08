@@ -31,22 +31,12 @@ keypad: list[list[str]] = [
     ['-1', '0', '-1']
 ]
 
-
-def find_index_in_keypad(num: str) -> tuple[int, int]:
-    """
-    Returns the (row, column) index of the given number in the keypad.
-    """
-    num_int = int(num)
-    if num_int == 0:
-        return 3, 1
-    return (num_int - 1) // 3, (num_int - 1) % 3
-
-
 def get_pins(observed: str) -> list[str]:
     possible_digits_per_digit: list[list[str]] = [[] for _ in range(len(observed))]
 
     for index, num in enumerate(observed):
-        row, column = find_index_in_keypad(num)
+        num_int = int(num)
+        row, column = ((num_int - 1) // 3, (num_int - 1) % 3) if num_int != 0 else (3, 1)
 
         for row_change, column_change in (0, 0), (1, 0), (0, 1), (-1, 0), (0, -1):
 

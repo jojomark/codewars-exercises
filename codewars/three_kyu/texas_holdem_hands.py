@@ -101,7 +101,6 @@ def hand(hole_cards: list[str], community_cards: list[str]) -> tuple[str, list[s
 
         #  Straight flush
         if straight and flush:
-            print("HDIUJSGKIDGUISGDKSGHKJDGSKJGDKJJSLKD")
             if best_hand_hierarchy_value < HIERARCHY["four-of-a-kind"] or (
                     best_hand_so_far.hand_type == "straight-flush" and hand.cards[0] > best_hand_so_far.cards[0]):
                 best_hand_so_far = Hand(hand.cards, "straight-flush")
@@ -135,7 +134,7 @@ def hand(hole_cards: list[str], community_cards: list[str]) -> tuple[str, list[s
         if flush:
             if best_hand_hierarchy_value < HIERARCHY["flush"] or \
                     (best_hand_so_far.hand_type == "flush" and
-                     hand.cards[0] > best_hand_so_far.cards[0]):
+                     numeric_cards > significant_cards):
                 best_hand_so_far = Hand(hand.cards, "flush")
                 significant_cards = numeric_cards
             continue

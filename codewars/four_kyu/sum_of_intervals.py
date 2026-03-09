@@ -70,13 +70,13 @@ def sum_of_intervals(intervals: list[tuple[int, int]]) -> int:
     intervals = sorted(intervals, key=lambda x: x[0])  # Sorted by min value
     current_max_number = intervals[0][0]  # Smallest number
 
-    for interval in intervals:
-        if current_max_number < interval[0]:
-            intervals_sum += interval[1] - interval[0]
-            current_max_number = interval[1]
-        elif current_max_number < interval[1]:
-            intervals_sum += interval[1] - current_max_number
-            current_max_number = interval[1]
+    for bottom_interval, top_interval in intervals:
+        if current_max_number < bottom_interval:
+            intervals_sum += top_interval - bottom_interval
+            current_max_number = top_interval
+        elif current_max_number < top_interval:
+            intervals_sum += top_interval - current_max_number
+            current_max_number = top_interval
 
     return intervals_sum
 
